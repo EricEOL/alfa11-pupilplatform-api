@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ericeol.alfa11.pupilplatform.models.Operation;
+import com.ericeol.alfa11.pupilplatform.models.DTO.OperationDTO;
 import com.ericeol.alfa11.pupilplatform.repositories.OperationRepository;
 
 @RestController
@@ -20,9 +21,11 @@ public class OperationsController {
 	OperationRepository repository;
 	
 	@GetMapping
-	public Page<Operation> list(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable parameters) {
+	public Page<OperationDTO> list(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable parameters) {
+		
 		Page<Operation> operations = repository.findAll(parameters);
-		return operations;
+		
+		return OperationDTO.transform(operations);
 	}
 	
 }
