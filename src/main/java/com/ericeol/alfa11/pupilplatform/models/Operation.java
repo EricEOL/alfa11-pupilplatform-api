@@ -30,6 +30,12 @@ public class Operation {
 	public Operation() {
 	}
 	
+	public Operation(String stock, Double points, Pupil pupil) {
+		this.stock = stock;
+		this.points = points;
+		this.pupil = pupil;
+	}
+
 	public Long getId() {
 		return id;
 	}
