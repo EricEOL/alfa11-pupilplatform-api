@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ericeol.alfa11.pupilplatform.models.Operation;
 import com.ericeol.alfa11.pupilplatform.models.DTO.OperationDTO;
 import com.ericeol.alfa11.pupilplatform.models.form.OperationForm;
+import com.ericeol.alfa11.pupilplatform.models.update.UpdateOperation;
 import com.ericeol.alfa11.pupilplatform.repositories.OperationRepository;
 import com.ericeol.alfa11.pupilplatform.repositories.PupilRepository;
 
@@ -43,6 +45,17 @@ public class OperationsController {
 		return OperationDTO.transform(operations);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<OperationDTO> detail(@PathVariable Long id) {
+		Optional<Operation> operation = repository.findById(id);
+		
+		if(operation.isPresent()) {
+			return ResponseEntity.ok(new OperationDTO(operation.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<OperationDTO> add(@RequestBody OperationForm form, UriComponentsBuilder uriBuilder) {
@@ -54,15 +67,19 @@ public class OperationsController {
 		return ResponseEntity.created(uri).body(new OperationDTO(operation));
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<OperationDTO> detail(@PathVariable Long id) {
-		Optional<Operation> operation = repository.findById(id);
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<OperationDTO> update(@PathVariable Long id, @RequestBody UpdateOperation form) {
+			
+		Optional<Operation> operationIsPresent = repository.findById(id);
 		
-		if(operation.isPresent()) {
-			return ResponseEntity.ok(new OperationDTO(operation.get()));
+		if(operationIsPresent.isPresent()) {
+			Operation operation = form.update(id, repository);
+			return ResponseEntity.ok(new OperationDTO(operation));
 		}
 		
 		return ResponseEntity.notFound().build();
+		
 	}
 	
 	@DeleteMapping("/{id}")
