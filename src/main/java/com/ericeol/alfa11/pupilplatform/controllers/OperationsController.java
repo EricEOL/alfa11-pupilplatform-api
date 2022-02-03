@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,11 +55,25 @@ public class OperationsController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<OperationDTO> detailOperation(@PathVariable Long id) {
+	public ResponseEntity<OperationDTO> detail(@PathVariable Long id) {
 		Optional<Operation> operation = repository.findById(id);
 		
 		if(operation.isPresent()) {
 			return ResponseEntity.ok(new OperationDTO(operation.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		
+		Optional<Operation> operation = repository.findById(id);
+		
+		if(operation.isPresent()) {
+			repository.deleteById(id);
+			return ResponseEntity.ok().build();
 		}
 		
 		return ResponseEntity.notFound().build();
