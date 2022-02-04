@@ -1,8 +1,10 @@
 package com.ericeol.alfa11.pupilplatform.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +20,8 @@ public class RankingController {
 	OperationRepository operationRepository;
 
 	@GetMapping
-	public List<RankingDTO> generateFullRanking() {
-		List<RankingDTO> operations = operationRepository.sumDolarPointsAndGroupByPupilName();
+	public Page<RankingDTO> generateFullRanking(@PageableDefault(sort = "total", direction = Direction.DESC, page = 0, size = 10) Pageable parameters) {
+		Page<RankingDTO> operations = operationRepository.sumDolarPointsAndGroupByPupilName(parameters);
 		
 		return operations;
 	}
