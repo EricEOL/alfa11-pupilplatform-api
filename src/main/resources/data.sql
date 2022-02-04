@@ -10,3 +10,5 @@ INSERT INTO PUPIL_ROLES(pupil_id, roles_id) VALUES(2, 2);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 27, '2022-01-30 18:00:00', 1);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('B3', 490, '2022-01-27 18:00:00', 1);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 14, '2022-01-08 18:00:00', 1);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 23, '2022-01-08 18:00:00', 2);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 7, '2022-01-08 18:00:00', 2);
