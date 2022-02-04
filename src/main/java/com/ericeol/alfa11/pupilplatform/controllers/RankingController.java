@@ -19,9 +19,16 @@ public class RankingController {
 	@Autowired
 	OperationRepository operationRepository;
 
-	@GetMapping
-	public Page<RankingDTO> generateFullRanking(@PageableDefault(sort = "total", direction = Direction.DESC, page = 0, size = 10) Pageable parameters) {
+	@GetMapping("/dolar")
+	public Page<RankingDTO> generateFullDolarRanking(@PageableDefault(sort = "total", direction = Direction.DESC, page = 0, size = 5) Pageable parameters) {
 		Page<RankingDTO> operations = operationRepository.sumDolarPointsAndGroupByPupilName(parameters);
+		
+		return operations;
+	}
+	
+	@GetMapping("/b3")
+	public Page<RankingDTO> generateFullB3Ranking(@PageableDefault(sort = "total", direction = Direction.DESC, page = 0, size = 5) Pageable parameters) {
+		Page<RankingDTO> operations = operationRepository.sumB3PointsAndGroupByPupilName(parameters);
 		
 		return operations;
 	}
