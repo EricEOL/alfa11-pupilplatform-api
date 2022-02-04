@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ericeol.alfa11.pupilplatform.models.Operation;
 import com.ericeol.alfa11.pupilplatform.models.DTO.RankingDTO;
 import com.ericeol.alfa11.pupilplatform.repositories.OperationRepository;
 
@@ -19,13 +18,10 @@ public class RankingController {
 	OperationRepository operationRepository;
 
 	@GetMapping
-	public List<?> generateFullRanking() {
-		
-		List<RankingDTO> operations = operationRepository.sumDolarPointsAndGroupByPupil();
-		
+	public List<RankingDTO> generateFullRanking() {
+		List<RankingDTO> operations = operationRepository.sumDolarPointsAndGroupByPupilName();
 		
 		return operations;
-		
 	}
 	
 }
