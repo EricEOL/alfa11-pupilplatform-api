@@ -43,10 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/pupil").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET, "/operations/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/ranking/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
-		.anyRequest().permitAll()
+		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AuthenticationTokenFilter(tokenService, pupilRepository), UsernamePasswordAuthenticationFilter.class);
@@ -54,7 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().anyRequest();
+		//web.ignoring().anyRequest();
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
+
 	}
 	
 }

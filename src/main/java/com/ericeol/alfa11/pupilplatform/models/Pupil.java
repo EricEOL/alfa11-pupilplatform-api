@@ -37,10 +37,6 @@ public class Pupil implements UserDetails {
 	
 	@OneToMany
 	private List<Operation> operations = new ArrayList<>();
-	
-	private Double dolarPoints;
-	
-	private Double b3Points;
 
 	public Pupil() {
 	}
@@ -99,22 +95,6 @@ public class Pupil implements UserDetails {
 
 	public void setOperations(List<Operation> operations) {
 		this.operations = operations;
-	}
-
-	public Double getDolarPoints() {
-		return dolarPoints;
-	}
-
-	public void setDolarPoints(Double dolarPoints) {
-		this.dolarPoints = dolarPoints;
-	}
-
-	public Double getB3Points() {
-		return b3Points;
-	}
-
-	public void setB3Points(Double b3Points) {
-		this.b3Points = b3Points;
 	}
 
 	@Override
