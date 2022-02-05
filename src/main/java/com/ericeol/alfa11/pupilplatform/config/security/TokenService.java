@@ -20,7 +20,7 @@ public class TokenService {
 	@Value("${forum.jwt.secret}")
 	private String secret;
 
-	public String gerarToken(Authentication authentication) {
+	public String generateToken(Authentication authentication) {
 		
 		Pupil loggedUser = (Pupil) authentication.getPrincipal();
 		

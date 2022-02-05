@@ -31,13 +31,13 @@ public class AuthenticationController {
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {
 		
-		UsernamePasswordAuthenticationToken loginData = form.converter();
+		UsernamePasswordAuthenticationToken loginData = form.transform();
 		
 		try {
 			
 			Authentication authentication = authenticationManager.authenticate(loginData);
 			
-			String token = tokenService.gerarToken(authentication);
+			String token = tokenService.generateToken(authentication);
 			
 			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
 			
