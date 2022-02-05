@@ -30,7 +30,7 @@ public class Pupil implements UserDetails {
 	
 	private String password;
 	
-	private String avatar;
+	private String avatar = "https://w7.pngwing.com/pngs/223/244/png-transparent-computer-icons-avatar-user-profile-avatar-heroes-rectangle-black.png";
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles = new ArrayList<>();
@@ -39,6 +39,12 @@ public class Pupil implements UserDetails {
 	private List<Operation> operations = new ArrayList<>();
 
 	public Pupil() {
+	}
+	
+	public Pupil(String name, String email, String password) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 	
 	public Long getId() {
