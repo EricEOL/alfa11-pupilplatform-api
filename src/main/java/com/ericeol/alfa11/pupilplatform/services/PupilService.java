@@ -2,6 +2,7 @@ package com.ericeol.alfa11.pupilplatform.services;
 
 import com.ericeol.alfa11.pupilplatform.models.DTO.PupilDTO;
 import com.ericeol.alfa11.pupilplatform.models.Pupil;
+import com.ericeol.alfa11.pupilplatform.models.form.PupilForm;
 import com.ericeol.alfa11.pupilplatform.repositories.PupilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,11 @@ public class PupilService {
         Page<Pupil> pupils = pupilRepository.findAll(params);
 
         return PupilDTO.transform(pupils);
+    }
+
+    public void add(PupilForm form) {
+        Pupil pupil = form.transform();
+        pupilRepository.save(pupil);
     }
 
 }

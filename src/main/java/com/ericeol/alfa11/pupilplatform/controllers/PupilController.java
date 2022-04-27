@@ -46,10 +46,7 @@ public class PupilController {
 	@PostMapping
 	@Transactional
 	public void add(@RequestBody PupilForm form) {
-		
-		Pupil pupil = form.transform();
-		
-		repository.save(pupil);
+		pupilService.add(form);
 	}
 	
 	@DeleteMapping("/{id}")
