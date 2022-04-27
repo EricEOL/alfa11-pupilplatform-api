@@ -52,19 +52,7 @@ public class PupilController {
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		
-		Optional<Pupil> checkPupilExists = repository.findById(id);
-		
-		if(checkPupilExists.isPresent()) {
-
-			operationRepository.deleteAllByPupilId(id);
-			
-			repository.deleteById(id);
-			
-			return ResponseEntity.ok().build();
-		}
-		
-		return ResponseEntity.notFound().build();
+		pupilService.delete(id);
 	}
 	
 }
