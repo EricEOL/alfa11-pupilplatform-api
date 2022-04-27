@@ -2,6 +2,7 @@ package com.ericeol.alfa11.pupilplatform.controllers;
 
 import java.util.Optional;
 
+import com.ericeol.alfa11.pupilplatform.services.PupilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,16 +31,16 @@ public class PupilController {
 
 	@Autowired
 	PupilRepository repository;
+
+	@Autowired
+	PupilService pupilService;
 	
 	@Autowired
 	OperationRepository operationRepository;
 	
 	@GetMapping
-	public Page<PupilDTO> list(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable parameters) {
-		
-		Page<Pupil> pupils = repository.findAll(parameters);
-		
-		return PupilDTO.transform(pupils);
+	public Page<PupilDTO> all(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable params) {
+		return pupilService.all(params);
 	}
 	
 	@PostMapping
