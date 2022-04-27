@@ -1,7 +1,5 @@
 package com.ericeol.alfa11.pupilplatform.controllers;
 
-import java.util.Optional;
-
 import com.ericeol.alfa11.pupilplatform.services.PupilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ericeol.alfa11.pupilplatform.models.Operation;
-import com.ericeol.alfa11.pupilplatform.models.Pupil;
 import com.ericeol.alfa11.pupilplatform.models.DTO.PupilDTO;
 import com.ericeol.alfa11.pupilplatform.models.form.PupilForm;
 import com.ericeol.alfa11.pupilplatform.repositories.OperationRepository;
@@ -52,7 +48,7 @@ public class PupilController {
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-		pupilService.delete(id);
+		return pupilService.delete(id);
 	}
 	
 }
