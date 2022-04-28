@@ -47,14 +47,8 @@ public class OperationsController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<OperationDTO> detail(@PathVariable Long id) {
-		Optional<Operation> operation = repository.findById(id);
-		
-		if(operation.isPresent()) {
-			return ResponseEntity.ok(new OperationDTO(operation.get()));
-		}
-		
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<OperationDTO> one(@PathVariable Long id) {
+		return operationsService.one(id);
 	}
 	
 	@PostMapping

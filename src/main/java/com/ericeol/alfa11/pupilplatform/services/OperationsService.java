@@ -7,7 +7,10 @@ import com.ericeol.alfa11.pupilplatform.repositories.PupilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class OperationsService {
@@ -24,6 +27,16 @@ public class OperationsService {
 
         return OperationDTO.transform(operations);
 
+    }
+
+    public ResponseEntity<OperationDTO> one(Long id) {
+        Optional<Operation> operation = operationRepository.findById(id);
+
+        if(operation.isPresent()) {
+            return ResponseEntity.ok(new OperationDTO(operation.get()));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }
