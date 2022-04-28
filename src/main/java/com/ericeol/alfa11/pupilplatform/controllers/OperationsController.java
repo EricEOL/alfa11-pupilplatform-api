@@ -59,16 +59,7 @@ public class OperationsController {
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<OperationDTO> update(@PathVariable Long id, @RequestBody UpdateOperation form) {
-			
-		Optional<Operation> operationIsPresent = repository.findById(id);
-		
-		if(operationIsPresent.isPresent()) {
-			Operation operation = form.update(id, repository);
-			return ResponseEntity.ok(new OperationDTO(operation));
-		}
-		
-		return ResponseEntity.notFound().build();
-		
+		return operationsService.update(id, form);
 	}
 	
 	@DeleteMapping("/{id}")

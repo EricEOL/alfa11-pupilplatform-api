@@ -3,6 +3,7 @@ package com.ericeol.alfa11.pupilplatform.services;
 import com.ericeol.alfa11.pupilplatform.models.DTO.OperationDTO;
 import com.ericeol.alfa11.pupilplatform.models.Operation;
 import com.ericeol.alfa11.pupilplatform.models.form.OperationForm;
+import com.ericeol.alfa11.pupilplatform.models.update.UpdateOperation;
 import com.ericeol.alfa11.pupilplatform.repositories.OperationRepository;
 import com.ericeol.alfa11.pupilplatform.repositories.PupilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,17 @@ public class OperationsService {
         URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operation.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new OperationDTO(operation));
+    }
+
+    public ResponseEntity<OperationDTO> update(Long id, UpdateOperation updateOperationForm) {
+        Optional<Operation> operationIsPresent = operationRepository.findById(id);
+
+        if(operationIsPresent.isPresent()) {
+            Operation operation = updateOperationForm.update(id, operationRepository);
+            return ResponseEntity.ok(new OperationDTO(operation));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }
