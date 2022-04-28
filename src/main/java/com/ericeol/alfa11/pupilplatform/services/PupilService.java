@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -28,11 +29,13 @@ public class PupilService {
         return PupilDTO.transform(pupils);
     }
 
+    @Transactional
     public void add(PupilForm form) {
         Pupil pupil = form.transform();
         pupilRepository.save(pupil);
     }
 
+    @Transactional
     public ResponseEntity<Object> delete(Long id) {
         Optional<Pupil> checkPupilExists = pupilRepository.findById(id);
 

@@ -34,13 +34,11 @@ public class PupilController {
 	}
 	
 	@PostMapping
-	@Transactional
 	public void add(@RequestBody PupilForm form) {
 		pupilService.add(form);
 	}
 	
 	@DeleteMapping("/{id}")
-	@Transactional
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		return pupilService.delete(id);
 	}

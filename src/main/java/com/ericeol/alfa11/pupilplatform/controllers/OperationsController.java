@@ -52,14 +52,8 @@ public class OperationsController {
 	}
 	
 	@PostMapping
-	@Transactional
-	public ResponseEntity<OperationDTO> add(@RequestBody OperationForm form, UriComponentsBuilder uriBuilder) {
-		Operation operation = form.transform(pupilRepository);
-		repository.save(operation);
-		
-		URI uri = uriBuilder.path("/operations/{id}").buildAndExpand(operation.getId()).toUri();
-		
-		return ResponseEntity.created(uri).body(new OperationDTO(operation));
+	public ResponseEntity<OperationDTO> add(@RequestBody OperationForm form, UriComponentsBuilder uriComponentsBuilder) {
+		return operationsService.add(form, uriComponentsBuilder);
 	}
 	
 	@PutMapping("/{id}")
