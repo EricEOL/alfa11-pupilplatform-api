@@ -7,11 +7,11 @@ INSERT INTO ROLE(id, name) VALUES(2, 'ROLE_ADMIN');
 INSERT INTO PUPIL_ROLES(pupil_id, roles_id) VALUES(1, 1);
 INSERT INTO PUPIL_ROLES(pupil_id, roles_id) VALUES(2, 2);
 
-INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 27, '2022-01-30 18:00:00', 1);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('USD', 27, '2022-01-30 18:00:00', 1);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('B3', 490, '2022-01-27 18:00:00', 1);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('B3', 940, '2022-01-27 18:00:00', 1);
-INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 14, '2022-01-08 18:00:00', 1);
-INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 23, '2022-01-08 18:00:00', 2);
-INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('Dólar', 7, '2022-01-08 18:00:00', 2);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('USD', 14, '2022-01-08 18:00:00', 1);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('USD', 23, '2022-01-08 18:00:00', 2);
+INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('USD', 7, '2022-01-08 18:00:00', 2);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('B3', 590, '2022-01-08 18:00:00', 2);
 INSERT INTO OPERATION(stock, points, created_at, pupil_id) VALUES('B3', 120, '2022-01-08 18:00:00', 2);

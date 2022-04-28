@@ -12,7 +12,7 @@ import com.ericeol.alfa11.pupilplatform.models.DTO.RankingDTO;
 @Repository
 public interface OperationRepository extends JpaRepository<Operation, Long>{
 
-	@Query(value = "SELECT new com.ericeol.alfa11.pupilplatform.models.DTO.RankingDTO(SUM(op.points) AS total, op.pupil.name AS pupil) FROM Operation op WHERE op.stock = 'Dólar' GROUP BY op.pupil.name")
+	@Query(value = "SELECT new com.ericeol.alfa11.pupilplatform.models.DTO.RankingDTO(SUM(op.points) AS total, op.pupil.name AS pupil) FROM Operation op WHERE op.stock = 'USD' GROUP BY op.pupil.name")
 	Page<RankingDTO> sumDolarPointsAndGroupByPupilName(Pageable parameters);
 	
 	@Query(value = "SELECT new com.ericeol.alfa11.pupilplatform.models.DTO.RankingDTO(SUM(op.points) AS total, op.pupil.name AS pupil) FROM Operation op WHERE op.stock = 'B3' GROUP BY op.pupil.name")

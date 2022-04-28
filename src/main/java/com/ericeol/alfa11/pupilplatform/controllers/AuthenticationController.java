@@ -29,7 +29,7 @@ public class AuthenticationController {
 	private TokenService tokenService;
 	
 	@PostMapping
-	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {
+	public ResponseEntity<TokenDTO> auth(@RequestBody @Valid LoginForm form) {
 		
 		UsernamePasswordAuthenticationToken loginData = form.transform();
 		
