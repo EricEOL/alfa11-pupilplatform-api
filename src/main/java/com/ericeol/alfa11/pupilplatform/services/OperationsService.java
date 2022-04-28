@@ -54,6 +54,7 @@ public class OperationsService {
         return ResponseEntity.created(uri).body(new OperationDTO(operation));
     }
 
+    @Transactional
     public ResponseEntity<OperationDTO> update(Long id, UpdateOperation updateOperationForm) {
         Optional<Operation> operationIsPresent = operationRepository.findById(id);
 
@@ -65,4 +66,13 @@ public class OperationsService {
         return ResponseEntity.notFound().build();
     }
 
+    @Transactional
+    public ResponseEntity<?> delete(Long id) {
+        Optional<Operation> operation = operationRepository.findById(id);
+
+        if(operation.isEmpty()) return ResponseEntity.notFound().build();
+
+        operationRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }
