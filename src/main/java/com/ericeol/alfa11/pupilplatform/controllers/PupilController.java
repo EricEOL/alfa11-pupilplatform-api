@@ -26,13 +26,7 @@ import com.ericeol.alfa11.pupilplatform.repositories.PupilRepository;
 public class PupilController {
 
 	@Autowired
-	PupilRepository repository;
-
-	@Autowired
 	PupilService pupilService;
-	
-	@Autowired
-	OperationRepository operationRepository;
 	
 	@GetMapping
 	public Page<PupilDTO> all(@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 10) Pageable params) {
